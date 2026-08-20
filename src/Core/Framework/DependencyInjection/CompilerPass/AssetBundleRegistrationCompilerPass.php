@@ -5,10 +5,10 @@ namespace Shopware\Core\Framework\DependencyInjection\CompilerPass;
 use Shopware\Core\Framework\Adapter\Asset\AssetPackageService;
 use Shopware\Core\Framework\Bundle;
 use Shopware\Core\Framework\Log\Package;
+use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
-use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 
 #[Package('framework')]
 class AssetBundleRegistrationCompilerPass implements CompilerPassInterface
