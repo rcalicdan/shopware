@@ -29,7 +29,7 @@ class OpenApi3Generator implements ApiDefinitionGeneratorInterface
     private readonly string $schemaPath;
 
     /**
-     * @param array{Framework: array{path: string}} $bundles
+     * @param array{Framework: array{path: string, ...}, ...} $bundles
      */
     public function __construct(
         private readonly OpenApiSchemaBuilder $openApiBuilder,

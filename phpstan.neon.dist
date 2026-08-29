@@ -18,6 +18,9 @@ parameters:
         - vendor/symfony/dependency-injection/Loader/Configurator/ContainerConfigurator.php
 
     excludePaths:
+        # Non-ignorable return covariance in EntitySearchResult
+        - src/Core/Framework/DataAbstractionLayer/Search/EntitySearchResult.php
+
         # vendor patches over autoload files
         - src/Core/Framework/Adapter/Doctrine/Patch/AbstractAsset.php
 
@@ -42,6 +45,14 @@ parameters:
         - Shopware\Core\Content\Product\Hook\Pricing\ProductProxy
 
     ignoreErrors:
+        # Generic variance rules
+        -
+            identifier: generics.variance
+            reportUnmatched: false
+        -
+            identifier: generics.callSiteVarianceRedundant
+            reportUnmatched: false
+
         # The symfony extension checks against the "normal" container, not the test container
         # Therefore some services in the tests are not found and the extension can not infer that all private services are public during test execution
         -
@@ -157,7 +168,8 @@ parameters:
             paths:
                 - tests/integration/**/_fixtures/**
 
-        - # Needs a proper class-string annotation in `\Shopware\Core\Framework\DataAbstractionLayer\EntityDefinition::getCollectionClass` and all child classes
+        # Needs a proper class-string annotation in `\Shopware\Core\Framework\DataAbstractionLayer\EntityDefinition::getCollectionClass` and all child classes
+        -
             message: '#PHPDoc tag @var with type .*Shopware\\Core\\Framework\\DataAbstractionLayer\\EntityCollection.* is not subtype of native type string#'
             paths:
                 - src/Core/Framework/DataAbstractionLayer/Dbal/EntityReader.php
@@ -170,9 +182,9 @@ parameters:
                 - src/Core/Framework/DataAbstractionLayer/Dbal/EntityAggregator.php
                 - src/Elasticsearch/Framework/DataAbstractionLayer/ElasticsearchEntityAggregatorHydrator.php
 
-        - # PHPdocs are inherited from https://github.com/JetBrains/phpstorm-stubs/tree/master/redis and should be updated there
-            identifier: missingType.iterableValue
-            path: src/Core/Test/Stub/Redis
+        # PHPdocs are inherited from https://github.com/JetBrains/phpstorm-stubs/tree/master/redis and should be updated there
+        - identifier: missingType.iterableValue
+          path: src/Core/Test/Stub/Redis
 
         - # It is checked before if the entity supports custom fields, but it is not possible for PHPStan to recognize this
             message: '#Call to an undefined method TElement of Shopware\\Core\\Framework\\DataAbstractionLayer\\Entity::.*CustomFields.*\(\)#'

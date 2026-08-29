@@ -6,7 +6,7 @@ use Shopware\Core\Framework\Log\Package;
 use Shopware\Core\Framework\Struct\Collection;
 
 /**
- * @template TElement of Entity
+ * @template-covariant TElement of Entity
  *
  * @extends Collection<TElement, string>
  */
