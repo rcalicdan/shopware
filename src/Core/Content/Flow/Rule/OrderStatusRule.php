@@ -25,7 +25,7 @@ class OrderStatusRule extends FlowRule
     protected array $salutationIds = [];
 
     /**
-     * @param list<string> $stateIds
+     * @param list<string>|null $stateIds
      *
      * @internal
      */

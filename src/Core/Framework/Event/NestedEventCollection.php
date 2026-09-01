@@ -41,9 +41,7 @@ class NestedEventCollection extends Collection
     }
 
     /**
-     * @return TEvent
-     *
-     * @phpstan-ignore return.phpDocType (Does not work as expected. See https://github.com/phpstan/phpstan/discussions/13728)
+     * @return class-string<TEvent>
      */
     #[ReturnTypeNarrowing(version: 'v6.8.0', newType: 'string')]
     protected function getExpectedClass(): ?string

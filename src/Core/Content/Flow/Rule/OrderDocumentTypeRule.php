@@ -20,7 +20,7 @@ class OrderDocumentTypeRule extends FlowRule
     public const RULE_NAME = 'orderDocumentType';
 
     /**
-     * @param list<string> $documentIds
+     * @param list<string>|null $documentIds
      *
      * @internal
      */

@@ -31,7 +31,7 @@ use Symfony\Component\VarExporter\LazyGhostTrait;
 /**
  * @final
  *
- * @template TEntityCollection of EntityCollection
+ * @template-covariant TEntityCollection of EntityCollection
  */
 #[Package('framework')]
 class EntityRepository

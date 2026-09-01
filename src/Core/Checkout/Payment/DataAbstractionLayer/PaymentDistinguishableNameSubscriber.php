@@ -5,6 +5,7 @@ namespace Shopware\Core\Checkout\Payment\DataAbstractionLayer;
 use Shopware\Core\Checkout\Payment\PaymentEvents;
 use Shopware\Core\Checkout\Payment\PaymentMethodEntity;
 use Shopware\Core\Framework\DataAbstractionLayer\Event\EntityLoadedEvent;
+use Shopware\Core\Framework\DataAbstractionLayer\PartialEntity;
 use Shopware\Core\Framework\Log\Package;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -22,14 +23,19 @@ class PaymentDistinguishableNameSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @param EntityLoadedEvent<PaymentMethodEntity> $event
+     * @param EntityLoadedEvent<PaymentMethodEntity|PartialEntity> $event
      */
     public function addDistinguishablePaymentName(EntityLoadedEvent $event): void
     {
         foreach ($event->getEntities() as $payment) {
+            if ($payment instanceof PartialEntity) {
+                continue;
+            }
+
             if ($payment->getTranslation('distinguishableName') === null) {
                 $payment->addTranslated('distinguishableName', $payment->getTranslation('name'));
             }
+
             if ($payment->getDistinguishableName() === null) {
                 $payment->setDistinguishableName($payment->getName());
             }

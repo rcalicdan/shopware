@@ -42,7 +42,7 @@ class StoreApiGenerator implements ApiDefinitionGeneratorInterface
     private readonly string $schemaPath;
 
     /**
-     * @param array{Framework: array{path: string}} $bundles
+     * @param array{Framework: array{path: string, ...}, ...} $bundles
      *
      * @internal
      */
